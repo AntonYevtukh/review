@@ -9,7 +9,7 @@ public class Book {
     private String author;
     private String publishedBy;
     private int yearOfPublishing;
-    private int qPages;
+    private int qPages; //pages было бы достаточно
     private long price;
 
     public String getName() {
@@ -63,12 +63,12 @@ public class Book {
     public Book() {    }
 
 
-
+    //Можно использовать this для вызова других конструкторов
     public Book(String name, String author, int qPages) {
         this.name = name;
         this.author = author;
         this.qPages = qPages;
-        this.publishedBy = "none";
+        this.publishedBy = "none"; //можно было бы вынести в константу
         this.yearOfPublishing = -1;
 
     }
@@ -94,6 +94,8 @@ public class Book {
 
     @Override
     public String toString() {
+        //тут можно без this
+        //обычно он нужен в конструкторах и сеттерах
         String yearS;
         if(this.getYearOfPublishing() == -1){
             yearS = "unknown";
@@ -106,6 +108,7 @@ public class Book {
                 + ", costs " + this.getPrice();
     }
 
+    //То же замечание, лучше сохранить в переменную и использовать геттер
     public static Comparator<Book> publicherComparator = new Comparator<Book>() {
         @Override
         public int compare(Book o1, Book o2) {

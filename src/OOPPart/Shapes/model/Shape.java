@@ -35,6 +35,8 @@ public abstract class Shape implements Drawable {
         return "This shape color is " + shapeColor;
     }
 
+    //лучше дописать методы, возвращающе компараторы, а сами компараторы сделать private
+    //или использовать в вызывающем коде (при сортировке) Comparator.comparingDouble(Shape::calcArea);
     public static Comparator<Shape> areaComparator = new Comparator<Shape>() {
         @Override
         public int compare(Shape o1, Shape o2) {
@@ -48,4 +50,13 @@ public abstract class Shape implements Drawable {
             return o1.getShapeColor().compareTo(o2.getShapeColor());
         }
     };
+
+    /*
+    public static Comparator<Shape> getAreaComparator() {
+        return Comparator.comparingDouble(Shape::calcArea);
+    }
+
+    public static Comparator<Shape> getColorComparator() {
+        return Comparator.comparing(Shape::getShapeColor);
+    }*/
 }

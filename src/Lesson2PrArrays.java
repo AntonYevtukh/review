@@ -4,9 +4,9 @@ public class Lesson2PrArrays {
 
     public static void main(String[] args) {
         Lesson2PrArrays pr  = new Lesson2PrArrays();
-        int[] test1 = {1,2,3,4,5,6,7,8, -1, -2, -3, -4, -5, -6, -7, -8, 0};
+        int[] test = {1,2,3,4,5,6,7,8, -1, -2, -3, -4, -5, -6, -7, -8, 0};
         int[] test2 = {1,2,3,4,5, -4, -5, -6, -7, -8, 0, 22, 35, 19, 7, 22, 16};
-        int[] test = {1, 3, 5};
+        int[] test3 = {1, 3, 5};
 //        System.out.println("Task 1");
  //       pr.task1(test);
 //
@@ -183,10 +183,10 @@ public class Lesson2PrArrays {
                 //Двойной тернарный оператор
                 //Если четное число уже попадалось в массиве, сравнить текущее с максимумом, и присвоить
                 //максимуму большее из них, иначе, если это первое четное число в массиве, присвоить его максимуму
-                max = evenFound ? (arr1[i] > max ? arr1[i] : max) : arr1[i];
+                max = evenFound ? Math.max(arr1[i], max) : arr1[i];
                 evenFound = true;
             } else {
-                min = oddFound ? (arr1[i] < min ? arr1[i] : min) : arr1[i];
+                min = oddFound ? Math.min(arr1[i], min) : arr1[i];
                 oddFound = true;
             }
         }
@@ -231,7 +231,7 @@ public class Lesson2PrArrays {
         int[] arr2 = Arrays.copyOf(arr22, arr22.length);
         int[] res = new int[arr1.length];
         for (int i = 0; i < arr1.length; i++) {
-            res[i]=arr1[i]+arr2[i];
+            res[i]=arr1[i]+arr2[i]; //пробелы
         }
 
         return res;
@@ -243,6 +243,7 @@ public class Lesson2PrArrays {
 
         int[] res = new int[arr1.length+arr2.length];
 
+        //Можно было использовать System.arrayCopy()
         for (int i = 0; i < arr1.length; i++) {
             res[i]=arr1[i];
         }
@@ -258,7 +259,7 @@ public class Lesson2PrArrays {
         int[] arr = Arrays.copyOf(arr1, arr1.length);
 
         int min = arr[0];
-        int index = 0;
+        int index = 0;  //лучше было бы назвать minIndex или indexOfMin, с max аналогично
         int max = arr[0];
         int index1 = 0;
         for (int j = 0; j < arr.length; j++) {
@@ -280,15 +281,15 @@ public class Lesson2PrArrays {
         int[] arr = Arrays.copyOf(arr1, arr1.length);
 
         int min = arr[0];
-        int q1 = 1;
+        int q1 = 1; //трудно понять, что хранят q1 и q2, как я понял, количество мин и макс элементов,
         int max = arr[0];
-        int q2 = 1;
+        int q2 = 1; //стоило бы назвать содержательнее
         for (int j = 0; j < arr.length; j++) {
             if(arr[j]<min){
                 min=arr[j];
                 q1=1;
             }
-            else if(arr[j]==min)q1++;
+            else if(arr[j]==min)q1++; //это очень плохо и сбивает с толку, не стоит писать выражение в той же строке
             if(arr[j]>max) {
                 max = arr[j];
                 q2 = 1;
@@ -297,7 +298,7 @@ public class Lesson2PrArrays {
         }
         int[] res = new int[arr.length-(q1+q2)];
         for (int i = 0, j = 0; i < res.length; i++, j++) {
-            if (arr[j] != max && arr[j] != min)res[i]=arr[j];
+            if (arr[j] != max && arr[j] != min)res[i]=arr[j]; //то же самое, я вообще сначала подумал, что это условие
             else {
 
                 i--;
@@ -312,12 +313,12 @@ public class Lesson2PrArrays {
 
         int counter = 0;
         for(int i = 0; i < arr.length; i++){
-            if(arr[i]<0)counter++;
+            if(arr[i]<0)counter++;                  //значение 0 в этой реализации является положительным, так не должно быть
         }
-        int[] min = new int[counter];
+        int[] min = new int[counter];              //неудачное название, лучше positives / negatives
         int[] plus = new int[arr.length-counter];
 
-        for(int i = 0, j = 0, n = 0; i<arr.length; i++){
+        for(int i = 0, j = 0, n = 0; i<arr.length; i++){ //i, j, k, но это мелочи
             if(arr[i]<0){
                 min[j]=arr[i];
                 j++;
@@ -329,6 +330,34 @@ public class Lesson2PrArrays {
         }
         System.out.println("Positive: " + Arrays.toString(min));
         System.out.println("Negative: " + Arrays.toString(plus));
+
+        /*int negativesCount = 0;
+        int positivesCount = 0;
+
+        for (int i: arr1) { //можно пльзоваться форичом, тут i это сам элемент массива
+            if (i < 0) { //даже одиночные выражения стоит заключать в фигурные скобки, это повышает читабельность
+                negativesCount++;
+            } else if (i > 0) {
+                positivesCount++;
+            }
+        }
+
+        int[] negatives = new int[negativesCount];
+        int[] positives = new int[positivesCount];
+
+        for (int i = 0, j = 0, k = 0; i < arr1.length; i++) {
+            if(arr[i] < 0){
+                negatives[j] = arr1[i];
+                j++;
+            }
+            else if (arr[i] > 0) {
+                positives[k] = arr[i];
+                k++;
+            }
+        }
+
+        System.out.println("Negatives: " + Arrays.toString(negatives));
+        System.out.println("Negatives: " + Arrays.toString(positives));*/
     }
 
     public int[] task16(int[] arr11, int[] arr22){
@@ -337,11 +366,12 @@ public class Lesson2PrArrays {
 
         int counter = 0;
         for(int i = 0; i < arr1.length; i++){
-            if(((Math.abs(arr1[i]) % 2) == 1) && ((Math.abs(arr2[i]) % 2) == 1))counter++;
+            if(((Math.abs(arr1[i]) % 2) == 1) && ((Math.abs(arr2[i]) % 2) == 1))counter++; //опять перенос
+            //в условии можно использовать такое выражение: if((arr1[i] & arr2[i] & 1) == 1)
         }
         int[] res = new int[counter*2];
         for (int i = 0, j=0; i < arr1.length; i++) {
-            if(((Math.abs(arr1[i]) % 2) == 1) && ((Math.abs(arr2[i]) % 2) == 1)){
+            if((arr1[i] & arr1[i] & 1) == 1){
                 res[j++]=arr1[i];
                 res[j++]=arr2[i];
             }
@@ -349,6 +379,7 @@ public class Lesson2PrArrays {
         return res;
     }
 
+    //Тут я уже не понял, чем это отличается от 14 таски
     public int[] task17(int[] arr){
         int min = arr[0];
         int q1 = 0;
@@ -389,6 +420,8 @@ public class Lesson2PrArrays {
         int mid2 = meanArithmetic(arr2);
         int[] arr3 = task12(arr1,arr2); //concatenate arrays
         int counter = 0;
+        //Проще было пройтись по каждому из массивов
+        //Результаты min и max сохранить в переренные, чтобы не вычислять на каждой итерации заново
         for (int i = 0; i < arr3.length; i++) {
             if ((arr3[i] < Math.max(mid1,mid2)) && (arr3[i] > Math.min(mid1,mid2)))counter++;
         }

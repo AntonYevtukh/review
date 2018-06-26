@@ -4,6 +4,7 @@ public class Circle extends Shape {
 
     private int radius;
 
+    //геттеры / сеттеры должны быть после конструктора
     public int getRadius() {
         return radius;
     }

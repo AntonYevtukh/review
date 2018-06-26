@@ -5,8 +5,10 @@ import OOPPart.Books.model.Book;
 
 public class Main {
 
+    //Нет реализации MVC и работы пользователя с консолью
+    //Не выполнено требование: Если в результате обработки массива данных не найдено, то
+    //необходимо вывести соответствующее сообщение.
     public static void main(String[] args) {
-
 
         Book bk1 = new Book("Witcher", "Sapkovsky", "Pol group", 2010, 350, 220);
         Book bk2 = new Book("Big Getsby", "Some Author", "Book Global", 1998, 220, 220);
@@ -23,6 +25,7 @@ public class Main {
 
         BooksController bCon = new BooksController();
 
+        //Можно вынести горизонтальную черту в константу private static final String SEPARATOR = "---------------------"
         System.out.println("--------");
 
         bCon.printBooks(testBooks);

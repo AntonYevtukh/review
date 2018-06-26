@@ -38,6 +38,7 @@ public class Triangle extends Shape {
         this.sideC = side;
     }
 
+    //Тоже можно вызвать внутри другие конструкторы
    public Triangle(int side, String color){
         super(color);
         this.sideA = side;
